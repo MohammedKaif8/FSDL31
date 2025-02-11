@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operations with Conditions, Loops, Functions, Events, Classes, and Objects</title>
+    <style>
+        /* Styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Arithmetic Operations with Conditions, Loops, Functions, Events, Classes, and Objects</h2>
+
+    <div class="container">
+        <div class="input-group">
+            <label for="num1">Enter first number: </label>
+            <input type="number" id="num1" class="num-input" required>
+        </div>
+        <div class="input-group">
+            <label for="num2">Enter second number: </label>
+            <input type="number" id="num2" class="num-input" required>
+        </div>
+        <button id="calculateBtn" class="calc-btn">Calculate</button>
+
+        <p id="result" class="result-text"></p>
+    </div>
+
+    <script>
+        // Create a Calculator object with methods for arithmetic operations
+        const calculator = {
+            num1: 0,
+            num2: 0,
+            
+            // Set values for num1 and num2
+            setNumbers: function(a, b) {
+                this.num1 = a;
+                this.num2 = b;
+            },
+            
+            // Arithmetic operations
+            add: function() {
+                return this.num1 + this.num2;
+            },
+            
+            subtract: function() {
+                return this.num1 - this.num2;
+            },
+            
+            multiply: function() {
+                return this.num1 * this.num2;
+            },
+            
+            divide: function() {
+                if (this.num2 === 0) {
+                    return 'Cannot divide by zero';
+                }
+                return this.num1 / this.num2;
+            },
+            
+            // Condition check
+            checkCondition: function(result) {
+                if (result > 10) {
+                    return "The result is greater than 10.";
+                } else if (result < 10) {
+                    return "The result is less than 10.";
+                } else {
+                    return "The result is equal to 10.";
+                }
+            },
+            
+            // Generate output based on operations
+            generateOutput: function() {
+                let sum = this.add();
+                let difference = this.subtract();
+                let product = this.multiply();
+                let quotient = this.divide();
+
+                return `
+                    For num1 = ${this.num1} and num2 = ${this.num2}:
+                    Sum: ${sum} - ${this.checkCondition(sum)}
+                    Difference: ${difference} - ${this.checkCondition(difference)}
+                    Product: ${product} - ${this.checkCondition(product)}
+                    Quotient: ${quotient} - ${this.checkCondition(quotient)}
+                `;
+            }
+        };
+
+        // Event listener for the calculate button
+        document.getElementById("calculateBtn").addEventListener("click", function() {
+            // Get the input values from the user
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+
+            // Check if the inputs are valid numbers
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById("result").innerHTML = "<span class='error'>Please enter valid numbers.</span>";
+            } else {
+                // Set the numbers in the calculator object
+                calculator.setNumbers(num1, num2);
+
+                // Generate and display the output
+                let output = calculator.generateOutput();
+                document.getElementById("result").innerHTML = output;
+            }
+        });
+    </script>
+
+</body>
+</html>
+

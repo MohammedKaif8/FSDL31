@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operations with Conditions, Loops, Functions, Events, and Classes</title>
+    <style>
+        /* Styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Arithmetic Operations with Conditions, Loops, Functions, Events, and Classes</h2>
+
+    <div class="container">
+        <div class="input-group">
+            <label for="num1">Enter first number: </label>
+            <input type="number" id="num1" class="num-input" required>
+        </div>
+        <div class="input-group">
+            <label for="num2">Enter second number: </label>
+            <input type="number" id="num2" class="num-input" required>
+        </div>
+        <button id="calculateBtn" class="calc-btn">Calculate</button>
+
+        <p id="result" class="result-text"></p>
+    </div>
+
+    <script>
+        // Functions for arithmetic operations
+        function add(a, b) {
+            return a + b;
+        }
+
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        function divide(a, b) {
+            return a / b;
+        }
+
+        // Function to check if a result is greater than, less than, or equal to 10
+        function checkCondition(result) {
+            if (result > 10) {
+                return "The result is greater than 10.";
+            } else if (result < 10) {
+                return "The result is less than 10.";
+            } else {
+                return "The result is equal to 10.";
+            }
+        }
+
+        // Function to generate output for each set of numbers
+        function generateOutput(num1, num2) {
+            let sum = add(num1, num2);
+            let difference = subtract(num1, num2);
+            let product = multiply(num1, num2);
+            let quotient = divide(num1, num2);
+
+            return `
+                For num1 = ${num1} and num2 = ${num2}:
+                Sum: ${sum} - ${checkCondition(sum)}
+                Difference: ${difference} - ${checkCondition(difference)}
+                Product: ${product} - ${checkCondition(product)}
+                Quotient: ${quotient} - ${checkCondition(quotient)}
+            `;
+        }
+
+        // Event listener for the calculate button
+        document.getElementById("calculateBtn").addEventListener("click", function() {
+            // Get the input values from the user
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+
+            // Check if the inputs are valid numbers
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById("result").innerHTML = "<span class='error'>Please enter valid numbers.</span>";
+            } else {
+                // Generate and display the output
+                let output = generateOutput(num1, num2);
+                document.getElementById("result").innerHTML = output;
+            }
+        });
+    </script>
+
+</body>
+</html>

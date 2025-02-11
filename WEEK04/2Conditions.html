@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators with Conditions Example</title>
+</head>
+<body>
+
+    <h2>Basic Arithmetic Operations with Conditions</h2>
+    <p id="result"></p>
+
+    <script>
+        // Declare two variables with numeric values
+        let num1 = 8;
+        let num2 = 4;
+
+        // Perform arithmetic operations
+        let sum = num1 + num2;          // Addition
+        let difference = num1 - num2;   // Subtraction
+        let product = num1 * num2;      // Multiplication
+        let quotient = num1 / num2;     // Division
+
+        // Function to check if a result is greater than, less than, or equal to 10
+        function checkCondition(result) {
+            if (result > 10) {
+                return "The result is greater than 10.";
+            } else if (result < 10) {
+                return "The result is less than 10.";
+            } else {
+                return "The result is equal to 10.";
+            }
+        }
+
+        // Display the values of num1, num2, and the results of the operations with conditions
+        document.getElementById("result").innerText = 
+            "num1: " + num1 + "\n" +
+            "num2: " + num2 + "\n" +
+            "Sum: " + sum + " - " + checkCondition(sum) + "\n" +
+            "Difference: " + difference + " - " + checkCondition(difference) + "\n" +
+            "Product: " + product + " - " + checkCondition(product) + "\n" +
+            "Quotient: " + quotient + " - " + checkCondition(quotient);
+    </script>
+
+</body>
+</html>

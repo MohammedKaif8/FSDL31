@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators with Conditions, Loops, and Functions</title>
+</head>
+<body>
+
+    <h2>Arithmetic Operations with Conditions, Loops, and Functions</h2>
+    <p id="result"></p>
+
+    <script>
+        // Declare an array of number pairs to perform operations on
+        let numbers = [
+            { num1: 8, num2: 4 },
+            { num1: 15, num2: 5 },
+            { num1: 12, num2: 3 },
+            { num1: 9, num2: 2 }
+        ];
+
+        // Function to perform addition
+        function add(a, b) {
+            return a + b;
+        }
+
+        // Function to perform subtraction
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        // Function to perform multiplication
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        // Function to perform division
+        function divide(a, b) {
+            return a / b;
+        }
+
+        // Function to check if a result is greater than, less than, or equal to 10
+        function checkCondition(result) {
+            if (result > 10) {
+                return "The result is greater than 10.";
+            } else if (result < 10) {
+                return "The result is less than 10.";
+            } else {
+                return "The result is equal to 10.";
+            }
+        }
+
+        // Function to generate output for each set of numbers
+        function generateOutput(num1, num2) {
+            // Perform the arithmetic operations using the respective functions
+            let sum = add(num1, num2);
+            let difference = subtract(num1, num2);
+            let product = multiply(num1, num2);
+            let quotient = divide(num1, num2);
+
+            // Format and return the results
+            return `
+                For num1 = ${num1} and num2 = ${num2}:
+                Sum: ${sum} - ${checkCondition(sum)}
+                Difference: ${difference} - ${checkCondition(difference)}
+                Product: ${product} - ${checkCondition(product)}
+                Quotient: ${quotient} - ${checkCondition(quotient)}
+            `;
+        }
+
+        // Use a loop to generate results for each pair of numbers
+        let output = "";
+        for (let i = 0; i < numbers.length; i++) {
+            let num1 = numbers[i].num1;
+            let num2 = numbers[i].num2;
+
+            // Add the result of each pair to the output string
+            output += generateOutput(num1, num2) + "\n\n";
+        }
+
+        // Display the output on the webpage
+        document.getElementById("result").innerText = output;
+    </script>
+
+</body>
+</html>

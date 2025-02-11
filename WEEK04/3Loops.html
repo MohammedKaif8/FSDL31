@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators with Conditions and Loops</title>
+</head>
+<body>
+
+    <h2>Arithmetic Operations with Conditions and Loops</h2>
+    <p id="result"></p>
+
+    <script>
+        // Declare an array of number pairs to perform operations on
+        let numbers = [
+            { num1: 8, num2: 4 },
+            { num1: 15, num2: 5 },
+            { num1: 12, num2: 3 },
+            { num1: 9, num2: 2 }
+        ];
+
+        // Function to check if a result is greater than, less than, or equal to 10
+        function checkCondition(result) {
+            if (result > 10) {
+                return "The result is greater than 10.";
+            } else if (result < 10) {
+                return "The result is less than 10.";
+            } else {
+                return "The result is equal to 10.";
+            }
+        }
+
+        // Use a for loop to iterate over each pair of numbers and perform the operations
+        let output = "";
+        for (let i = 0; i < numbers.length; i++) {
+            let num1 = numbers[i].num1;
+            let num2 = numbers[i].num2;
+
+            // Perform arithmetic operations
+            let sum = num1 + num2;
+            let difference = num1 - num2;
+            let product = num1 * num2;
+            let quotient = num1 / num2;
+
+            // Append the results to the output string
+            output += 
+                "For num1 = " + num1 + " and num2 = " + num2 + ":\n" +
+                "Sum: " + sum + " - " + checkCondition(sum) + "\n" +
+                "Difference: " + difference + " - " + checkCondition(difference) + "\n" +
+                "Product: " + product + " - " + checkCondition(product) + "\n" +
+                "Quotient: " + quotient + " - " + checkCondition(quotient) + "\n\n";
+        }
+
+        // Display the result in the webpage
+        document.getElementById("result").innerText = output;
+    </script>
+
+</body>
+</html>

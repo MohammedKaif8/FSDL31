@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators with Conditions, Loops, Functions, and Events</title>
+</head>
+<body>
+
+    <h2>Arithmetic Operations with Conditions, Loops, Functions, and Events</h2>
+
+    <!-- Form for user input -->
+    <div>
+        <label for="num1">Enter first number: </label>
+        <input type="number" id="num1" required>
+    </div>
+    <div>
+        <label for="num2">Enter second number: </label>
+        <input type="number" id="num2" required>
+    </div>
+    <button id="calculateBtn">Calculate</button>
+
+    <p id="result"></p>
+
+    <script>
+        // Functions for arithmetic operations
+        function add(a, b) {
+            return a + b;
+        }
+
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        function divide(a, b) {
+            return a / b;
+        }
+
+        // Function to check if a result is greater than, less than, or equal to 10
+        function checkCondition(result) {
+            if (result > 10) {
+                return "The result is greater than 10.";
+            } else if (result < 10) {
+                return "The result is less than 10.";
+            } else {
+                return "The result is equal to 10.";
+            }
+        }
+
+        // Function to generate output for each set of numbers
+        function generateOutput(num1, num2) {
+            let sum = add(num1, num2);
+            let difference = subtract(num1, num2);
+            let product = multiply(num1, num2);
+            let quotient = divide(num1, num2);
+
+            return `
+                For num1 = ${num1} and num2 = ${num2}:
+                Sum: ${sum} - ${checkCondition(sum)}
+                Difference: ${difference} - ${checkCondition(difference)}
+                Product: ${product} - ${checkCondition(product)}
+                Quotient: ${quotient} - ${checkCondition(quotient)}
+            `;
+        }
+
+        // Event listener for the calculate button
+        document.getElementById("calculateBtn").addEventListener("click", function() {
+            // Get the input values from the user
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+
+            // Check if the inputs are valid numbers
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById("result").innerText = "Please enter valid numbers.";
+            } else {
+                // Generate and display the output
+                let output = generateOutput(num1, num2);
+                document.getElementById("result").innerText = output;
+            }
+        });
+    </script>
+
+</body>
+</html>
