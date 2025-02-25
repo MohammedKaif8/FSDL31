@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to ETAMAX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://media.giphy.com/media/xT9IgzoKnwF2V3BXWM/giphy.gif'); /* Sample direct GIF URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        #timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+
+    <p id="timer">Loading countdown...</p>
+
+    <script>
+        // Set the target date for ETAMAX: 9:00 AM on 13 February 2025
+        const targetDate = new Date('February 13, 2025 09:00:00');
+
+        // Function to start the countdown
+        function startCountdown() {
+            // Get the current time
+            const currentDate = new Date();
+
+            // Calculate the time difference between the current date and the target date
+            let timeDifference = targetDate - currentDate;
+
+            // If the target time has already passed, stop the countdown
+            if (timeDifference <= 0) {
+                document.getElementById("timer").innerText = "ETAMAX has started!";
+                return;
+            }
+
+            // Calculate the remaining time in hours, minutes, and seconds
+            let remainingHours = Math.floor(timeDifference / (1000 * 60 * 60));
+            let remainingMinutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            let remainingSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Format and display the time
+            document.getElementById("timer").innerText = 
+                `Countdown to ETAMAX: ${formatTime(remainingHours)}:${formatTime(remainingMinutes)}:${formatTime(remainingSeconds)}`;
+
+            // Update the countdown every second
+            setTimeout(startCountdown, 1000);
+        }
+
+        // Function to format time to 2 digits (e.g., 05 instead of 5)
+        function formatTime(time) {
+            return time < 10 ? `0${time}` : time;
+        }
+
+        // Start the countdown
+        startCountdown();
+    </script>
+
+</body>
+</html>

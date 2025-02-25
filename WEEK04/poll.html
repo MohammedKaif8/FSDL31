@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #poll-result {
+            margin-top: 20px;
+        }
+
+        .poll-option {
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .result-bar {
+            height: 20px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Vote for Your Favorite Programming Language</h2>
+
+    <div>
+        <div class="poll-option">
+            <input type="radio" id="javascript" name="poll" value="javascript">
+            <label for="javascript">JavaScript</label>
+        </div>
+        <div class="poll-option">
+            <input type="radio" id="python" name="poll" value="python">
+            <label for="python">Python</label>
+        </div>
+        <div class="poll-option">
+            <input type="radio" id="java" name="poll" value="java">
+            <label for="java">Java</label>
+        </div>
+        <div class="poll-option">
+            <input type="radio" id="csharp" name="poll" value="csharp">
+            <label for="csharp">C#</label>
+        </div>
+
+        <button onclick="submitVote()">Vote</button>
+    </div>
+
+    <div id="poll-result">
+        <h3>Poll Results</h3>
+        <div>
+            <h4>JavaScript</h4>
+            <div id="javascript-result" class="result-bar" style="background-color: lightblue;"></div>
+        </div>
+        <div>
+            <h4>Python</h4>
+            <div id="python-result" class="result-bar" style="background-color: lightgreen;"></div>
+        </div>
+        <div>
+            <h4>Java</h4>
+            <div id="java-result" class="result-bar" style="background-color: lightcoral;"></div>
+        </div>
+        <div>
+            <h4>C#</h4>
+            <div id="csharp-result" class="result-bar" style="background-color: lightgoldenrodyellow;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Poll data (You can store the votes in an object or an array)
+        const pollData = {
+            javascript: 0,
+            python: 0,
+            java: 0,
+            csharp: 0
+        };
+
+        // Total number of votes cast
+        let totalVotes = 0;
+
+        // Function to submit a vote
+        function submitVote() {
+            const selectedOption = document.querySelector('input[name="poll"]:checked');
+            
+            if (!selectedOption) {
+                alert("Please select an option before submitting your vote.");
+                return;
+            }
+
+            const voteValue = selectedOption.value;
+            pollData[voteValue] += 1;
+            totalVotes += 1;
+
+            updatePollResults();
+        }
+
+        // Function to update the poll results
+        function updatePollResults() {
+            // Update the progress bars and percentages
+            document.getElementById('javascript-result').style.width = getPercentage(pollData.javascript) + '%';
+            document.getElementById('python-result').style.width = getPercentage(pollData.python) + '%';
+            document.getElementById('java-result').style.width = getPercentage(pollData.java) + '%';
+            document.getElementById('csharp-result').style.width = getPercentage(pollData.csharp) + '%';
+
+            // Optionally display percentages as text (uncomment if desired)
+            // document.getElementById('javascript-result').innerText = getPercentage(pollData.javascript) + '%';
+            // document.getElementById('python-result').innerText = getPercentage(pollData.python) + '%';
+            // document.getElementById('java-result').innerText = getPercentage(pollData.java) + '%';
+            // document.getElementById('csharp-result').innerText = getPercentage(pollData.csharp) + '%';
+        }
+
+        // Function to calculate the percentage of votes for each option
+        function getPercentage(votes) {
+            if (totalVotes === 0) return 0;
+            return ((votes / totalVotes) * 100).toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
