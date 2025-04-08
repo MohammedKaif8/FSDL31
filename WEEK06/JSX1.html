@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List with React JSX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .contact-card {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+        .contact-card h2 {
+            color: #2980b9;
+        }
+        .contact-card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<!-- Load React, ReactDOM, and Babel from CDN -->
+<script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Your JSX Code -->
+<script type="text/babel">
+
+// Define the Contact component
+function ContactCard({ name, email, phone }) {
+    return (
+        <div className="contact-card">
+            <h2>{name}</h2>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Phone:</strong> {phone}</p>
+        </div>
+    );
+}
+
+// Define the main component that will render the list of contacts
+function ContactList() {
+    const contacts = [
+        { name: 'MK', email: 'mk@example.com', phone: '123-456-7890' },
+        { name: 'Sam', email: 'sam@example.com', phone: '987-654-3210' },
+        { name: 'Amal', email: 'amal@example.com', phone: '555-123-4567' }
+    ];
+
+    return (
+        <div>
+            <h1>Contact List</h1>
+            {contacts.map((contact, index) => (
+                <ContactCard 
+                    key={index} 
+                    name={contact.name} 
+                    email={contact.email} 
+                    phone={contact.phone} 
+                />
+            ))}
+        </div>
+    );
+}
+
+// Render the ContactList component to the DOM
+ReactDOM.render(<ContactList />, document.getElementById('root'));
+
+</script>
+
+</body>
+</html>

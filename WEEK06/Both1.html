@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List with XML and JSX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .book-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+        .book-card h2 {
+            color: #2980b9;
+        }
+        .book-card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<!-- Load React, ReactDOM, and Babel from CDN -->
+<script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- JSX and JavaScript code -->
+<script type="text/babel">
+
+// Function to load XML data
+function loadXMLData() {
+    return new Promise((resolve, reject) => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var xmlDoc = this.responseXML;
+                var books = xmlDoc.getElementsByTagName('book');
+                var bookList = [];
+                for (var i = 0; i < books.length; i++) {
+                    var title = books[i].getElementsByTagName('title')[0].textContent;
+                    var author = books[i].getElementsByTagName('author')[0].textContent;
+                    var year = books[i].getElementsByTagName('year')[0].textContent;
+                    bookList.push({ title, author, year });
+                }
+                resolve(bookList);
+            }
+        };
+        xhttp.open("GET", "books.xml", true);
+        xhttp.send();
+    });
+}
+
+// BookCard Component to display individual book info
+function BookCard({ title, author, year }) {
+    return (
+        <div className="book-card">
+            <h2>{title}</h2>
+            <p><strong>Author:</strong> {author}</p>
+            <p><strong>Year:</strong> {year}</p>
+        </div>
+    );
+}
+
+// Main component to render the list of books
+function BookList() {
+    const [books, setBooks] = React.useState([]);
+
+    // Load the book data when the component mounts
+    React.useEffect(() => {
+        loadXMLData().then(data => {
+            setBooks(data);
+        });
+    }, []);
+
+    return (
+        <div>
+            <h1>Book List</h1>
+            {books.length === 0 ? (
+                <p>Loading books...</p>
+            ) : (
+                books.map((book, index) => (
+                    <BookCard 
+                        key={index} 
+                        title={book.title} 
+                        author={book.author} 
+                        year={book.year} 
+                    />
+                ))
+            )}
+        </div>
+    );
+}
+
+// Render the BookList component
+ReactDOM.render(<BookList />, document.getElementById('root'));
+
+</script>
+
+</body>
+</html>

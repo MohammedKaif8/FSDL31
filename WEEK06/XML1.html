@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List from XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .book {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .book h3 {
+            margin: 0;
+            color: #2980b9;
+        }
+        .book p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Library Book List</h1>
+<div id="bookList"></div>
+
+<script>
+    // Function to load and display the XML file data
+    function loadXML() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var xmlDoc = this.responseXML;
+                var books = xmlDoc.getElementsByTagName("book");
+                var output = '';
+
+                // Loop through each book element in the XML
+                for (var i = 0; i < books.length; i++) {
+                    var title = books[i].getElementsByTagName("title")[0].textContent;
+                    var author = books[i].getElementsByTagName("author")[0].textContent;
+                    var year = books[i].getElementsByTagName("year")[0].textContent;
+
+                    output += `
+                        <div class="book">
+                            <h3>${title}</h3>
+                            <p><strong>Author:</strong> ${author}</p>
+                            <p><strong>Year:</strong> ${year}</p>
+                        </div>
+                    `;
+                }
+
+                // Insert the generated output into the page
+                document.getElementById("bookList").innerHTML = output;
+            }
+        };
+        xhttp.open("GET", "books.xml", true); // Specify the path to your XML file
+        xhttp.send();
+    }
+
+    // Call the function to load XML data when the page is loaded
+    window.onload = loadXML;
+</script>
+
+</body>
+</html>
+
+
+
+
+

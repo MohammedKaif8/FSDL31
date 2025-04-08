@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .contact-card {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+        .contact-card h2 {
+            color: #2980b9;
+        }
+        .contact-card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Contact List</h1>
+<div id="contactList"></div>
+
+<script>
+    // Function to load and display XML data
+    function loadXML() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var xmlDoc = this.responseXML;
+                var contacts = xmlDoc.getElementsByTagName("contact");
+                var output = '';
+
+                // Loop through each contact element in the XML
+                for (var i = 0; i < contacts.length; i++) {
+                    var name = contacts[i].getElementsByTagName("name")[0].textContent;
+                    var email = contacts[i].getElementsByTagName("email")[0].textContent;
+                    var phone = contacts[i].getElementsByTagName("phone")[0].textContent;
+
+                    output += `
+                        <div class="contact-card">
+                            <h2>${name}</h2>
+                            <p><strong>Email:</strong> ${email}</p>
+                            <p><strong>Phone:</strong> ${phone}</p>
+                        </div>
+                    `;
+                }
+
+                // Insert the contact data into the HTML page
+                document.getElementById("contactList").innerHTML = output;
+            }
+        };
+        xhttp.open("GET", "contacts.xml", true); // Specify the path to your XML file
+        xhttp.send();
+    }
+
+    // Call the function to load XML data when the page is loaded
+    window.onload = loadXML;
+</script>
+
+</body>
+</html>
+
